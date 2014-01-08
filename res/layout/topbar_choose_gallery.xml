@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/common_top_wrapper"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/common_top_bar_height"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/topbar_bg" >
+
+    <LinearLayout
+        android:id="@+id/top_bar_background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+        
+        <ImageView
+            android:id="@+id/back_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/topbar_back_bt_marginleft"
+            android:background="@drawable/tobbar_back_bt_bg"/>
+        
+        <TextView
+            android:id="@+id/system_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_picture_nor"
+            android:background="@drawable/tab_left_select"
+            android:text="@string/system_photo"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_big"/>
+        
+        
+        <TextView
+            android:id="@+id/private_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_lock_chose"
+            android:background="@drawable/tab_right_nor"
+            android:text="@string/private_photo"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginRight="@dimen/topbar_back_bt_marginleft"
+            android:textColor="@color/red_pink"
+            android:textSize="@dimen/font_big"/>
+    </LinearLayout>
+
+</LinearLayout>

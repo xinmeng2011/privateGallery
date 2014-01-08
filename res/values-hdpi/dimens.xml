@@ -1,0 +1,14 @@
+<resources>
+    <dimen name="hello_padding_top">122dp</dimen>
+    <dimen name="hello_padding_bottom">150dp</dimen>
+    <dimen name="grid_column_width">145dp</dimen>
+    <dimen name="grid_item_w_h">125dp</dimen>
+    <dimen name="grid_item_smaller_w_h">100dp</dimen>
+    <dimen name="count_max_w">40dp</dimen>
+    <dimen name="grid_item_padding">10dp</dimen>
+    <dimen name="grid_switch_tab">50dp</dimen>
+    <dimen name="picture_column_width">145dp</dimen>
+    <dimen name="picture_item_padding">10dp</dimen>
+    <dimen name="picture_item_w_h">125dp</dimen>
+    <dimen name="common_top_bar_height">70dp</dimen>
+</resources>

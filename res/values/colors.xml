@@ -1,0 +1,9 @@
+<resources>
+    <color name="background">#ffffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="red_pink">#D86A54</color>
+    <color name="black_font">#333333</color>
+    <color name="gray_font">#8d8d8d</color>
+    <color name="page_bg">#f1f0f0</color>
+    <color name="pic_frame">#e5e5e5</color>
+</resources>

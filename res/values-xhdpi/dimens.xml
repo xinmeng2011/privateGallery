@@ -1,0 +1,31 @@
+<resources>
+    <dimen name="hello_padding_top">72dp</dimen>
+    <dimen name="hello_padding_bottom">100dp</dimen>
+    <dimen name="common_top_bar_height">47dp</dimen>
+    <dimen name="grid_column_width">80dp</dimen>
+    <dimen name="grid_item_w_h">81dp</dimen>
+    <dimen name="grid_item_smaller_w_h">76dp</dimen>
+    <dimen name="grid_des_bottom">8dp</dimen>
+    <dimen name="count_max_w">55dp</dimen>
+    <dimen name="grid_item_padding">5dp</dimen>
+    <dimen name="picture_column_width">80dp</dimen>
+    <dimen name="picture_item_padding">5dp</dimen>
+    <dimen name="picture_item_w_h">70dp</dimen>
+    <dimen name="topbar_back_bt_marginleft">10dp</dimen>
+    <dimen name="topbar_bt_width">147dp</dimen>
+    <dimen name="topbar_margin_bottom">11dp</dimen>
+    <dimen name="little_title_margin_left">12dp</dimen>
+    <dimen name="little_title_space">8dp</dimen>
+    <dimen name="little_space_width">2dp</dimen>
+    <dimen name="font_text_top">6dp</dimen>
+    <dimen name="top_image_right">12dp</dimen>
+    <dimen name="freme_width">1dp</dimen>
+    <dimen name="freme_cross">4dp</dimen>
+    <dimen name="font_big">17dp</dimen>
+    <dimen name="font_mid">13dp</dimen>
+    <dimen name="font_small">12dp</dimen>
+    <dimen name="pic_item_padding">3dp</dimen>
+    
+    <dimen name="lockview_bt_magrin">10dp</dimen>
+	<dimen name="lockview_bt_width">192dp</dimen>
+</resources>

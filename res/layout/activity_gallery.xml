@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/page_bg">
+    
+    <com.mm.privategallery.view.EditTopBar
+        android:id="@+id/topbar_edit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    
+    <com.mm.privategallery.view.ChooseGalleryTopBar 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/topbar_normal">
+    </com.mm.privategallery.view.ChooseGalleryTopBar>
+    
+    <TextView 
+        android:id="@+id/tv"
+        android:textColor="@color/black_font"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/photo_title"
+        android:textSize="@dimen/font_mid"
+        android:layout_marginLeft="@dimen/little_title_margin_left"
+        android:layout_below="@id/topbar_normal"
+        android:layout_marginTop="@dimen/topbar_margin_bottom"
+        android:layout_marginBottom="@dimen/topbar_margin_bottom"/>
+    
+    <View 
+        android:id="@+id/view"
+        android:background="#e5e5e5"
+        android:layout_height="wrap_content"
+        android:layout_width="3px"
+        android:layout_marginLeft="@dimen/little_title_space"
+        android:layout_alignTop="@id/tv"
+        android:layout_alignBottom="@id/tv"
+        android:layout_toRightOf="@id/tv"/>
+    
+    <TextView 
+        android:id="@+id/tv_count"
+        android:textSize="@dimen/font_mid"
+        android:textColor="@color/black_font"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/little_title_space"
+        android:layout_alignTop="@id/tv"
+        android:layout_alignBottom="@id/tv"
+        android:layout_toRightOf="@id/view"/>
+    
+    <View
+        android:id="@+id/view_2"
+        android:background="#e5e5e5"
+        android:layout_height="@dimen/little_space_width"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/tv"
+        android:layout_marginLeft="@dimen/little_title_margin_left"
+        android:layout_marginRight="@dimen/little_title_margin_left"
+        android:layout_marginBottom="@dimen/topbar_margin_bottom"/>
+    
+    <GridView 
+        android:layout_centerHorizontal="true"
+	    android:id="@+id/gallery_map"  
+	    android:layout_below="@id/view_2"
+	    android:layout_width="fill_parent"   
+	    android:layout_height="fill_parent"  
+	    android:numColumns="auto_fit" 
+	    android:columnWidth="@dimen/grid_column_width"  
+	    android:stretchMode="spacingWidthUniform"  
+	    android:gravity="center"
+	    android:listSelector="#00000000"/>  
+	    
+   <com.mm.privategallery.view.BottomBar
+        android:id="@+id/bottombar_edit"
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+</RelativeLayout>

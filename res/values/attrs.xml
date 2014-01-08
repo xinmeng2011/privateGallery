@@ -1,0 +1,8 @@
+<resources>
+       	<declare-styleable name="LockPatternView">
+        <attr name="aspect" format="string" />
+		<attr name="lineColor" format="color" />
+		<attr name="errColor" format="color" />
+		<attr name="lineWidth" format="dimension" />
+    </declare-styleable>
+</resources>

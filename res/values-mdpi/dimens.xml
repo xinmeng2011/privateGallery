@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="hello_padding_top">272dp</dimen>
+    <dimen name="hello_padding_bottom">100dp</dimen>
+</resources>

@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/pic_item_padding">
+    <FrameLayout
+        android:layout_width="@dimen/picture_item_w_h"
+        android:layout_height="@dimen/picture_item_w_h"
+        android:padding="@dimen/freme_width"
+        android:background="@color/pic_frame">
+    <ImageView 
+        android:id="@+id/pic_src_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"/>
+    </FrameLayout>
+    
+    <ImageView
+        android:id="@+id/mark_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_chose"/>
+</RelativeLayout>
