@@ -30,22 +30,24 @@ import android.widget.Toast;
 
 public class ChooseGalleryActivity extends Activity {
 
-	GridView mGalleryGridView;
-	GalleryFolderAdapter mAdapter;
-	ChooseGalleryTopBar mTopbar;
-	TextView mCount;
-	EditTopBar mEditTopBar;
-	BottomBar mBottomBar;
-	ProgressDialog mProgressDialog;
-	TextView mTypeTextView;
-	boolean isPrivateMode = false;
-	boolean isEdit=false;
+	private GridView mGalleryGridView;
+	private GalleryFolderAdapter mAdapter;
+	private ChooseGalleryTopBar mTopbar;
+	private TextView mCount;
+	private EditTopBar mEditTopBar;
+	private BottomBar mBottomBar;
+	private ProgressDialog mProgressDialog;
+	private TextView mTypeTextView;
+	private boolean isPrivateMode = false;
+	private boolean isEdit=false;
 	
-	final int DELETE_OK=1;
-	final int TERSFER_OK=2;
-	final static int REQUEST_CODE_SET_PWD = 0x07;
-	final static int REQUEST_CODE_VERIFY_PWD = 0x08;
+	private final int DELETE_OK=1;
+	private final int TERSFER_OK=2;
+	private final int READ_GALLERY_DONE = 3;
+	private final static int REQUEST_CODE_SET_PWD = 0x07;
+	private final static int REQUEST_CODE_VERIFY_PWD = 0x08;
 	private boolean mIsPrivatePassed = false;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -128,12 +130,10 @@ public class ChooseGalleryActivity extends Activity {
 
 	private void initData(){
 		if(!isPrivateMode){
-			List<GalleryFolderDataItem> folders = GalleryEngine.getSingle().getGalleryFolderList();
-			refreshSelectedStatus(folders);
+			mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.plz_wait), getResources().getString(R.string.reading));
+			readSystemGalleryAsync();
 			mAdapter = new GalleryFolderAdapter(this);
 			mGalleryGridView.setAdapter(mAdapter);
-			mAdapter.setData(folders);
-			mCount.setText(folders.size() + "¸ö");
 		}else{
 			switchToPrisvateView();
 		}
@@ -307,10 +307,14 @@ public class ChooseGalleryActivity extends Activity {
 				closeDlg();
 				setEditStatus(false);
 				break;
+			case READ_GALLERY_DONE:
+				bindData();
+				closeDlg();
+				break;
 			default:
 				break;
 			}
-			}
+		}
 	};
 	
 	private void openPswFirst(){
@@ -358,6 +362,24 @@ public class ChooseGalleryActivity extends Activity {
 			default:
 					break;
 			}
+	}
+	
+	private void readSystemGalleryAsync(){
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				GalleryEngine.getSingle().getGalleryFolderList();
+				mHandler.sendEmptyMessage(READ_GALLERY_DONE);
+			}
+		}).start();
+	}
+	
+	private void bindData(){
+		List<GalleryFolderDataItem> folders = GalleryEngine.getSingle().getGalleryFolderList();
+		refreshSelectedStatus(folders);
+		mAdapter.setData(folders);
+		mCount.setText(folders.size() + "¸ö");
 	}
 	
 }

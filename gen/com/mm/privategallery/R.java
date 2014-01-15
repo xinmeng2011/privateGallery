@@ -151,46 +151,44 @@ containing a value of this type.
         public static final int white_line=0x7f020035;
     }
     public static final class id {
-        public static final int action_settings=0x7f090029;
-        public static final int back_bt=0x7f09000f;
-        public static final int bottom_container=0x7f090020;
+        public static final int action_settings=0x7f090027;
+        public static final int back_bt=0x7f09000d;
+        public static final int bottom_container=0x7f09001e;
         public static final int bottombar_edit=0x7f09000a;
-        public static final int btn_modify_pwd=0x7f09001f;
-        public static final int btn_ok=0x7f090021;
+        public static final int btn_modify_pwd=0x7f09001d;
+        public static final int btn_ok=0x7f09001f;
         public static final int button_capture=0x7f090001;
         public static final int button_switch=0x7f090002;
-        public static final int camera_bt=0x7f09000b;
         public static final int camera_preview=0x7f090000;
-        public static final int choose_bt=0x7f090028;
-        public static final int common_top_wrapper=0x7f090013;
-        public static final int count_tv=0x7f09001c;
-        public static final int edit_title=0x7f090027;
-        public static final int folder_cover1=0x7f09001a;
-        public static final int folder_cover2=0x7f090018;
-        public static final int folder_describe=0x7f09001d;
-        public static final int folder_title_tv=0x7f090010;
-        public static final int gallery_bt=0x7f09000c;
+        public static final int choose_bt=0x7f090026;
+        public static final int common_top_wrapper=0x7f090011;
+        public static final int count_tv=0x7f09001a;
+        public static final int edit_title=0x7f090025;
+        public static final int folder_cover1=0x7f090018;
+        public static final int folder_cover2=0x7f090016;
+        public static final int folder_describe=0x7f09001b;
+        public static final int folder_title_tv=0x7f09000e;
+        public static final int gallery_bt=0x7f09000b;
         public static final int gallery_map=0x7f090009;
-        public static final int layout1=0x7f090019;
-        public static final int layout2=0x7f090017;
-        public static final int left_btn=0x7f090015;
-        public static final int lock_container=0x7f09001e;
-        public static final int lock_view=0x7f090023;
-        public static final int mark_bt=0x7f09000d;
-        public static final int mark_image=0x7f09001b;
-        public static final int pic_src_image=0x7f090024;
-        public static final int picture_map=0x7f090011;
-        public static final int private_bt=0x7f090026;
-        public static final int right_btn=0x7f090016;
-        public static final int single_image=0x7f090012;
-        public static final int system_bt=0x7f090025;
-        public static final int top_bar_background=0x7f090014;
-        public static final int top_wrapper=0x7f09000e;
+        public static final int layout1=0x7f090017;
+        public static final int layout2=0x7f090015;
+        public static final int left_btn=0x7f090013;
+        public static final int lock_container=0x7f09001c;
+        public static final int lock_view=0x7f090021;
+        public static final int mark_image=0x7f090019;
+        public static final int pic_src_image=0x7f090022;
+        public static final int picture_map=0x7f09000f;
+        public static final int private_bt=0x7f090024;
+        public static final int right_btn=0x7f090014;
+        public static final int single_image=0x7f090010;
+        public static final int system_bt=0x7f090023;
+        public static final int top_bar_background=0x7f090012;
+        public static final int top_wrapper=0x7f09000c;
         public static final int topbar_edit=0x7f090003;
         public static final int topbar_normal=0x7f090004;
         public static final int tv=0x7f090005;
         public static final int tv_count=0x7f090007;
-        public static final int tv_tips=0x7f090022;
+        public static final int tv_tips=0x7f090020;
         public static final int view=0x7f090006;
         public static final int view_2=0x7f090008;
     }
@@ -233,19 +231,21 @@ containing a value of this type.
         public static final int lock_verify_title=0x7f060013;
         /**  Accessibility description sent when user adds a cell to the pattern.  
          */
-        public static final int lockscreen_access_pattern_cell_added=0x7f06001f;
+        public static final int lockscreen_access_pattern_cell_added=0x7f060021;
         /**  Accessibility description sent when the pattern times out and is cleared. 
          */
-        public static final int lockscreen_access_pattern_cleared=0x7f06001e;
+        public static final int lockscreen_access_pattern_cleared=0x7f060020;
         /**  Accessibility description sent when user completes drawing a pattern. 
          */
-        public static final int lockscreen_access_pattern_detected=0x7f060020;
+        public static final int lockscreen_access_pattern_detected=0x7f060022;
         /**  Accessibility description sent when user starts drawing a lock pattern. 
          */
-        public static final int lockscreen_access_pattern_start=0x7f06001d;
+        public static final int lockscreen_access_pattern_start=0x7f06001f;
         public static final int no_sd_tip=0x7f060003;
         public static final int photo_title=0x7f060009;
+        public static final int plz_wait=0x7f06001d;
         public static final int private_photo=0x7f060008;
+        public static final int reading=0x7f06001e;
         public static final int remove_private=0x7f06000c;
         public static final int secret_error=0x7f06000d;
         public static final int show_gallery=0x7f060004;

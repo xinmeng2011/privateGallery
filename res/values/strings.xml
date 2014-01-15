@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">PrivateGallery</string>
+    <string name="app_name">私相館</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="no_sd_tip">SD卡不可用</string>
@@ -30,6 +30,10 @@
 	<string name="lock_modify_success">成功修改密码</string>
 	<string name="lock_min_connect_length">至少连接%d个点</string>
 	<string name="unlock_error">密码错误，请重试</string>
+	
+	<string name="plz_wait">请稍后</string>
+	<string name="reading">读取相册中...</string>
+	
 	    <!-- Accessibility description sent when user starts drawing a lock pattern. -->
 	<string name="lockscreen_access_pattern_start">Pattern started</string>
 	<!-- Accessibility description sent when the pattern times out and is cleared. -->
