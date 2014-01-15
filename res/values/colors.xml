@@ -6,4 +6,6 @@
     <color name="gray_font">#8d8d8d</color>
     <color name="page_bg">#f1f0f0</color>
     <color name="pic_frame">#e5e5e5</color>
+    <color name="folder_bg_pressed">#8f838286</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -185,7 +186,7 @@ public class ChooseGalleryActivity extends Activity {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.back_bt:
-				finish();
+				goBack();
 				break;
 			case R.id.choose_bt:
 				mAdapter.chooseAllOrNot();
@@ -382,4 +383,20 @@ public class ChooseGalleryActivity extends Activity {
 		mCount.setText(folders.size() + "¸ö");
 	}
 	
+	private void goBack(){
+		if(!isEdit){
+			finish();
+		}else{
+			mAdapter.clearEditStatus();
+			setEditStatus(false);
+		}
+	}
+	
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && isEdit) {
+        	goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

@@ -163,6 +163,20 @@ public class GalleryFolderAdapter extends BaseAdapter {
 		return ;
 	}
 	
+	public void clearEditStatus(){
+		if(mFolderItems == null){
+			return ;
+		}
+		for (int i = 0; i < mFolderItems.size(); i++) {
+			GalleryFolderDataItem item = mFolderItems.get(i);
+			if(item !=null ){
+			  item.isSelected =false;
+			}
+		}
+		notifyDataSetChanged();
+		return ;
+	}
+	
 	public List<GalleryFolderDataItem> getSelectedItem(){
 		List<GalleryFolderDataItem> items= new ArrayList<GalleryFolderDataItem>();
 		if(mFolderItems == null){

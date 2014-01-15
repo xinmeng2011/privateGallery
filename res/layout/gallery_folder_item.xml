@@ -2,49 +2,61 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <FrameLayout
-        android:layout_width="@dimen/grid_item_smaller_w_h"
-        android:layout_height="@dimen/grid_item_smaller_w_h"
-        android:padding="@dimen/freme_width"
-        android:background="@color/white"
-        android:id="@+id/layout2"
-        android:layout_centerHorizontal="true">
-    <ImageView
-        android:id="@+id/folder_cover2"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="centerCrop"
-        android:background="@color/white"/>
-    </FrameLayout>
-    <FrameLayout
-        android:layout_width="@dimen/grid_item_w_h"
-        android:layout_height="@dimen/grid_item_w_h"
-        android:id="@+id/layout1"
-        android:padding="@dimen/freme_width"
-        android:layout_marginTop="@dimen/freme_cross"
-        android:background="@color/white"
-        android:layout_centerHorizontal="true">
-    <ImageView
-        android:id="@+id/folder_cover1"
-        android:layout_width="@dimen/grid_item_w_h"
-        android:layout_height="@dimen/grid_item_w_h"
-        android:scaleType="centerCrop"
-        android:background="@color/white"  />
-    </FrameLayout>
-    
-    <ImageView
+    <RelativeLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pic_rl">
+	    <FrameLayout
+	        android:layout_width="@dimen/grid_item_smaller_w_h"
+	        android:layout_height="@dimen/grid_item_smaller_w_h"
+	        android:padding="@dimen/freme_width"
+	        android:background="@color/white"
+	        android:id="@+id/layout2"
+	        android:layout_centerHorizontal="true">
+	    <ImageView
+	        android:id="@+id/folder_cover2"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:scaleType="centerCrop"
+	        android:background="@color/white"/>
+	    </FrameLayout>
+	    <FrameLayout
+	        android:layout_width="@dimen/grid_item_w_h"
+	        android:layout_height="@dimen/grid_item_w_h"
+	        android:id="@+id/layout1"
+	        android:padding="@dimen/freme_width"
+	        android:layout_marginTop="@dimen/freme_cross"
+	        android:background="@color/white"
+	        android:layout_centerHorizontal="true">
+	    <ImageView
+	        android:id="@+id/folder_cover1"
+	        android:layout_width="@dimen/grid_item_w_h"
+	        android:layout_height="@dimen/grid_item_w_h"
+	        android:scaleType="centerCrop"
+	        android:background="@color/white"  />
+	    </FrameLayout>
+        <ImageView
         android:id="@+id/mark_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:src="@drawable/ic_chose"/>
+    </RelativeLayout>
+    <View 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignTop="@id/pic_rl"
+        android:layout_alignRight="@id/pic_rl"
+        android:layout_alignLeft="@id/pic_rl"
+        android:layout_alignBottom="@id/pic_rl"
+        android:background="@drawable/folder_bt_bg"/>
 
     <TextView
         android:id="@+id/count_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/layout1"
-        android:layout_alignRight="@id/layout1"
+        android:layout_alignBottom="@id/pic_rl"
+        android:layout_alignRight="@id/pic_rl"
         android:layout_marginRight="@dimen/freme_width"
         android:layout_marginBottom="@dimen/freme_width"
         android:maxWidth="@dimen/count_max_w"
@@ -57,12 +69,11 @@
         android:id="@+id/folder_describe"
         android:layout_width="@dimen/grid_item_w_h"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout1"
+        android:layout_below="@id/pic_rl"
         android:paddingBottom="@dimen/font_text_top"
         android:gravity="center_horizontal"
         android:singleLine="true"
         android:textSize="@dimen/font_small"
         android:textColor="@color/gray_font"
         android:text="123"/>
-
 </RelativeLayout>
