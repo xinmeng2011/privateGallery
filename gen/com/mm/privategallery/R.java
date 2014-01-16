@@ -157,7 +157,7 @@ containing a value of this type.
         public static final int action_settings=0x7f090028;
         public static final int back_bt=0x7f09000d;
         public static final int bottom_container=0x7f09001f;
-        public static final int bottombar_edit=0x7f09000a;
+        public static final int bottombar_edit=0x7f090009;
         public static final int btn_modify_pwd=0x7f09001e;
         public static final int btn_ok=0x7f090020;
         public static final int button_capture=0x7f090001;
@@ -172,7 +172,7 @@ containing a value of this type.
         public static final int folder_describe=0x7f09001c;
         public static final int folder_title_tv=0x7f09000e;
         public static final int gallery_bt=0x7f09000b;
-        public static final int gallery_map=0x7f090009;
+        public static final int gallery_map=0x7f09000a;
         public static final int layout1=0x7f090018;
         public static final int layout2=0x7f090016;
         public static final int left_btn=0x7f090013;

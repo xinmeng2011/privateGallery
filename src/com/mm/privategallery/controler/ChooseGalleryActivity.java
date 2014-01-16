@@ -108,9 +108,10 @@ public class ChooseGalleryActivity extends Activity {
 				if(item == null){
 					return false;
 				}
-				isEdit = !isEdit;
-				setEditStatus(isEdit);
 				if(isEdit){
+					goBack();
+				}else{
+					setEditStatus(true);
 					item.isSelected = true;
 					mAdapter.notifyDataSetChanged();
 					updateEditTopbar();

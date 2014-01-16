@@ -58,10 +58,18 @@
         android:layout_marginRight="@dimen/little_title_margin_left"
         android:layout_marginBottom="@dimen/topbar_margin_bottom"/>
     
+    <com.mm.privategallery.view.BottomBar
+        android:id="@+id/bottombar_edit"
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    
     <GridView 
         android:layout_centerHorizontal="true"
 	    android:id="@+id/gallery_map"  
 	    android:layout_below="@id/view_2"
+	    android:layout_above="@id/bottombar_edit"
 	    android:layout_width="fill_parent"   
 	    android:layout_height="fill_parent"  
 	    android:numColumns="auto_fit" 
@@ -69,11 +77,4 @@
 	    android:stretchMode="spacingWidthUniform"  
 	    android:gravity="center"
 	    android:listSelector="#00000000"/>  
-	    
-   <com.mm.privategallery.view.BottomBar
-        android:id="@+id/bottombar_edit"
-        android:layout_alignParentBottom="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
 </RelativeLayout>

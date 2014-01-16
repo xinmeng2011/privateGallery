@@ -14,6 +14,7 @@ import android.view.View;
 
 public class HelloActivity extends Activity {
 
+	private boolean mIsFromGallery = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,7 +25,10 @@ public class HelloActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-
+		if(mIsFromGallery){
+			finish();
+			return;
+		}
 		mHandler.postDelayed(new Runnable() {
 
 			@Override
@@ -33,6 +37,11 @@ public class HelloActivity extends Activity {
 			}
 		}, 500);
 		// wait for ui showed
+	}
+	
+	@Override
+	protected void onStop(){
+		super.onStop();
 	}
 
 	private boolean checkSDStatus() {
@@ -66,6 +75,7 @@ public class HelloActivity extends Activity {
 			Intent intent = new Intent();
 			switch (v.getId()) {
 			case R.id.gallery_bt:
+				mIsFromGallery = true;
 				intent.setClass(HelloActivity.this, ChooseGalleryActivity.class);
 				startActivity(intent);
 				break;
