@@ -12,12 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class EditTopBar extends LinearLayout {
-	private Context mContext;
 	private TextView mTitleTextView;
 	private ImageView mChooseImageView;
 	public EditTopBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
-	    mContext = context;
 		initUI();
 	}
 	

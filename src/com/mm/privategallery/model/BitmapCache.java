@@ -1,19 +1,22 @@
 package com.mm.privategallery.model;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mm.privategallery.view.DecodeImageView;
 import com.mm.utility.BitmapUtility;
 
 import android.graphics.Bitmap;
+import android.provider.ContactsContract.CommonDataKinds.Identity;
 
 public class BitmapCache {
 	
-	private static BitmapCache self;
-	
+	private static BitmapCache self;	
 	private static Map<String, Bitmap> mBitmapCacheMap= new HashMap<String, Bitmap>();
+	private List< WeakReference<IDecodeInvoke> > mDecodeWaitList = new ArrayList<WeakReference<IDecodeInvoke>>();
 	public static BitmapCache getSingle() {
 		synchronized (BitmapCache.class) {
 			if (self == null) {
@@ -87,6 +90,36 @@ public class BitmapCache {
 			mBitmapCacheMap.put(path, bitmap);
 			return bitmap;
 		}
+	}
+	
+	public Bitmap getSingleBitmapCache(IDecodeInvoke mUIInvoke, final String path){
+		if(mBitmapCacheMap.containsKey(path)){
+			return mBitmapCacheMap.get(path);
+		}else{
+			new Thread(new Runnable() {				
+				@Override
+				public void run() {
+					Bitmap bitmap =  BitmapUtility.getDecodeBitmapWithArg(path);
+					mBitmapCacheMap.put(path, bitmap);
+					notifyDecodeReady(path);
+				}
+			}).start();
+			return null;
+		}
+	}
+	
+	private void notifyDecodeReady(String path){
+		for (int i = 0; i < mDecodeWaitList.size(); i++) {
+			WeakReference<IDecodeInvoke> item = mDecodeWaitList.get(i);
+			if(item.get() != null){
+				IDecodeInvoke di= item.get();
+				di.NotifyDecodeReady(path);
+			}
+		}
+	}
+	
+	public interface IDecodeInvoke{
+		public void NotifyDecodeReady(String path);
 	}
 	
 }

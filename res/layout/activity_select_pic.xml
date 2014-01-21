@@ -11,14 +11,14 @@
 	    android:id="@+id/top_wrapper"
 	    android:layout_width="fill_parent"
 	    android:layout_height="@dimen/common_top_bar_height"
-	    android:background="@drawable/topbar_bg" 
-	    android:gravity="center_vertical">
+	    android:background="@drawable/topbar_bg">
 	    
 	    <ImageView
 	        android:id="@+id/back_bt"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="@dimen/topbar_back_bt_marginleft"
+	        android:layout_centerVertical="true"
 	        android:src="@drawable/tobbar_back_bt_bg"/>
 	        
 	     <TextView 
@@ -27,7 +27,7 @@
 	         android:layout_height="wrap_content"
 	         android:textSize="@dimen/font_big"
 	         android:text="123"
-	         android:layout_centerHorizontal="true"
+	         android:layout_centerInParent="true"
 	         android:textColor="@color/black_font"/>
 	    
 	</RelativeLayout>

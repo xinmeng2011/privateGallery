@@ -11,6 +11,7 @@ import com.mm.privategallery.model.SmsPasswordManager;
 import com.mm.privategallery.view.BottomBar;
 import com.mm.privategallery.view.ChooseGalleryTopBar;
 import com.mm.privategallery.view.EditTopBar;
+import com.mm.utility.NotifyUtility;
 import com.mm.utility.SDHelper;
 
 import android.R.bool;
@@ -116,6 +117,7 @@ public class ChooseGalleryActivity extends Activity {
 					mAdapter.notifyDataSetChanged();
 					updateEditTopbar();
 				}
+				NotifyUtility.VibrateShort(ChooseGalleryActivity.this);
 				return true;
 			}
 		});

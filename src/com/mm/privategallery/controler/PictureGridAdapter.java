@@ -9,6 +9,7 @@ import com.mm.privategallery.controler.GalleryFolderAdapter.ViewHolder;
 import com.mm.privategallery.dao.ImageInfo;
 import com.mm.privategallery.model.BitmapCache;
 import com.mm.privategallery.model.GalleryFolderDataItem;
+import com.mm.privategallery.view.DecodeImageView;
 
 import android.R.integer;
 import android.content.Context;
@@ -27,6 +28,10 @@ public class PictureGridAdapter extends BaseAdapter {
 	
 	public PictureGridAdapter(Context context){
 		mInflater = LayoutInflater.from(context);
+	}
+	
+	public List<ImageInfo> getData(){
+		return mImagesDataList;
 	}
 	
 	public void setData(List<ImageInfo> data){
@@ -64,7 +69,7 @@ public class PictureGridAdapter extends BaseAdapter {
 	private View newView(final int position, final ViewGroup parent, final int viewType){
 		View view = mInflater.inflate(R.layout.picture_item, null);
 		ViewHolder holder = new ViewHolder();
-		holder.mPicImageView = (ImageView)view.findViewById(R.id.pic_src_image);
+		holder.mPicImageView = (DecodeImageView)view.findViewById(R.id.pic_src_image);
 		holder.mMarkImageView = (ImageView)view.findViewById(R.id.mark_image);
 		view.setTag(holder);
 		return view;
@@ -90,8 +95,7 @@ public class PictureGridAdapter extends BaseAdapter {
 	    }
 	    
 	    ImageInfo info = mImagesDataList.get(position);
-	    Bitmap bitmap= BitmapCache.getSingle().getSingleBitmapCache(info.pathString);
-	    holder.mPicImageView.setImageBitmap(bitmap);
+	    holder.mPicImageView.setPicPath(info.pathString);
 	    if(info.isSelected){
 	    	holder.mMarkImageView.setVisibility(View.VISIBLE);
 	    }else{
@@ -100,7 +104,7 @@ public class PictureGridAdapter extends BaseAdapter {
 	}
 	
 	private class ViewHolder{
-		ImageView mPicImageView;
+		DecodeImageView mPicImageView;
 		ImageView mMarkImageView;
 	}
 	

@@ -42,8 +42,9 @@ public class SelectPictureActivity extends Activity {
 	private boolean mPrivate=false;
 	private ProgressDialog mProgressDialog;
 	
-	private final int DELETE_OK=1;
-	private final int TANSFER_OK =2;
+	private final int DELETE_OK = 1;
+	private final int TANSFER_OK = 2;
+	private final int READ_PIC_READY = 3;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -55,12 +56,14 @@ public class SelectPictureActivity extends Activity {
 		mPrivate = SDHelper.isPrivateImage(mFolderPathString);
 		Toast.makeText(this, mFolderPathString, 500).show();
 	}
+	
 	@Override
 	protected void onStart() {
 		super.onStart();
 		initUI();
 		initData();
 	}
+	
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
@@ -105,9 +108,14 @@ public class SelectPictureActivity extends Activity {
 					return;
 				}
 				if(!mEdit){
-					String pathString= info.pathString;
 					Intent it= new Intent();
-					it.putExtra(SinglePictureViewActivity.SINGLE_IMAGE_PATH, pathString);
+					List<ImageInfo> infos= mAdapter.getData();
+					String[] pathStrings= new String[infos.size()];
+					for (int i = 0; i < infos.size(); i++) {
+						pathStrings[i]= infos.get(i).pathString;
+					}
+					it.putExtra(SinglePictureViewActivity.SINGLE_IMAGE_PATH, pathStrings);
+					it.putExtra(SinglePictureViewActivity.SINGLE_ITEM_ID, arg2);
 					it.setClass(SelectPictureActivity.this, SinglePictureViewActivity.class);
 				    startActivity(it);
 				}else{
@@ -155,7 +163,12 @@ public class SelectPictureActivity extends Activity {
 	private void initData(){
 		mAdapter = new PictureGridAdapter(this);
 		mPicturesGridView.setAdapter(mAdapter);
-		
+		mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.plz_wait),
+				                                    getResources().getString(R.string.reading));
+		readPictureAsync();
+	}
+	
+	private void bindData(){
 		GalleryFolderDataItem itemFolder = null;
 		if(!mPrivate){
 			itemFolder = GalleryEngine.getSingle().getFolderItemFromPath(mFolderPathString);
@@ -257,11 +270,13 @@ public class SelectPictureActivity extends Activity {
 			}
 		}).start();
 	}
+	
 	private void closeDlg(){
 		if(mProgressDialog != null){
 			mProgressDialog.dismiss();
 		}
 	}
+	
 	public Handler mHandler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -275,9 +290,29 @@ public class SelectPictureActivity extends Activity {
 				mAdapter.clearSelectedItems();
 				closeDlg();
 				setEditStatus(false);
+			case READ_PIC_READY:
+				bindData();
+				closeDlg();
+				break;
 			default:
 				break;
 			}
 			}
 	};
+	
+	
+	public void readPictureAsync(){
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				if(!mPrivate){
+					GalleryEngine.getSingle().getFolderItemFromPath(mFolderPathString);
+				}else{
+				    GalleryEngine.getSingle().getPrivateFolderItemFromPath(mFolderPathString);
+				}
+				mHandler.sendEmptyMessage(READ_PIC_READY);
+			}
+		}).start();
+	}
 }

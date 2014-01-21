@@ -7,7 +7,7 @@
         android:layout_height="@dimen/picture_item_w_h"
         android:padding="@dimen/freme_width"
         android:background="@color/pic_frame">
-    <ImageView 
+    <com.mm.privategallery.view.DecodeImageView 
         android:id="@+id/pic_src_image"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
