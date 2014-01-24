@@ -14,6 +14,7 @@ import com.mm.privategallery.view.DecodeImageView;
 import android.R.integer;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +26,10 @@ public class PictureGridAdapter extends BaseAdapter {
 
 	private LayoutInflater mInflater;
 	private List<ImageInfo> mImagesDataList;
-	
-	public PictureGridAdapter(Context context){
+	private Handler mHandler;
+	public PictureGridAdapter(Context context, Handler handler){
 		mInflater = LayoutInflater.from(context);
+		mHandler = handler;
 	}
 	
 	public List<ImageInfo> getData(){
@@ -95,7 +97,7 @@ public class PictureGridAdapter extends BaseAdapter {
 	    }
 	    
 	    ImageInfo info = mImagesDataList.get(position);
-	    holder.mPicImageView.setPicPath(info.pathString);
+	    holder.mPicImageView.setPicPath(info.pathString, mHandler);
 	    if(info.isSelected){
 	    	holder.mMarkImageView.setVisibility(View.VISIBLE);
 	    }else{

@@ -161,7 +161,7 @@ public class SelectPictureActivity extends Activity {
 	}
 	
 	private void initData(){
-		mAdapter = new PictureGridAdapter(this);
+		mAdapter = new PictureGridAdapter(this, mHandler);
 		mPicturesGridView.setAdapter(mAdapter);
 		mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.plz_wait),
 				                                    getResources().getString(R.string.reading));

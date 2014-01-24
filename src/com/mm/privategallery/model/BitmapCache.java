@@ -11,6 +11,8 @@ import com.mm.utility.BitmapUtility;
 
 import android.graphics.Bitmap;
 import android.provider.ContactsContract.CommonDataKinds.Identity;
+import android.test.ActivityTestCase;
+import android.util.Log;
 
 public class BitmapCache {
 	
@@ -82,23 +84,16 @@ public class BitmapCache {
 		return resultsBitmaps;
 	}
 	
-	public Bitmap getSingleBitmapCache(String path){
+	public Bitmap getSingleBitmapCache(final IDecodeInvoke UIInvoke, final String path){
 		if(mBitmapCacheMap.containsKey(path)){
 			return mBitmapCacheMap.get(path);
 		}else{
-			Bitmap bitmap =  BitmapUtility.getDecodeBitmapWithArg(path);
-			mBitmapCacheMap.put(path, bitmap);
-			return bitmap;
-		}
-	}
-	
-	public Bitmap getSingleBitmapCache(IDecodeInvoke mUIInvoke, final String path){
-		if(mBitmapCacheMap.containsKey(path)){
-			return mBitmapCacheMap.get(path);
-		}else{
+			WeakReference<BitmapCache.IDecodeInvoke> r = new WeakReference<BitmapCache.IDecodeInvoke>(UIInvoke);
+			mDecodeWaitList.add(r);
 			new Thread(new Runnable() {				
 				@Override
 				public void run() {
+					Log.i("xinmeng_bitmap", "decode thread begin " + path);
 					Bitmap bitmap =  BitmapUtility.getDecodeBitmapWithArg(path);
 					mBitmapCacheMap.put(path, bitmap);
 					notifyDecodeReady(path);
@@ -109,9 +104,12 @@ public class BitmapCache {
 	}
 	
 	private void notifyDecodeReady(String path){
+		Log.i("xinmeng_bitmap", "Go to notifyDecodeReady " + path);
 		for (int i = 0; i < mDecodeWaitList.size(); i++) {
 			WeakReference<IDecodeInvoke> item = mDecodeWaitList.get(i);
+			Log.i("xinmeng_bitmap", "notify waiting" + path);
 			if(item.get() != null){
+				Log.i("xinmeng_bitmap", "notify OK" + path);
 				IDecodeInvoke di= item.get();
 				di.NotifyDecodeReady(path);
 			}
@@ -119,7 +117,7 @@ public class BitmapCache {
 	}
 	
 	public interface IDecodeInvoke{
-		public void NotifyDecodeReady(String path);
+		public boolean NotifyDecodeReady(String path);
 	}
 	
 }
