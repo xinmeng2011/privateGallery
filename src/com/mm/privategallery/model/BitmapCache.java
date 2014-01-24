@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.mm.privategallery.view.DecodeImageView;
 import com.mm.utility.BitmapUtility;
@@ -19,6 +21,8 @@ public class BitmapCache {
 	private static BitmapCache self;	
 	private static Map<String, Bitmap> mBitmapCacheMap= new HashMap<String, Bitmap>();
 	private List< WeakReference<IDecodeInvoke> > mDecodeWaitList = new ArrayList<WeakReference<IDecodeInvoke>>();
+	private ExecutorService mFixThreadPool = null;
+	
 	public static BitmapCache getSingle() {
 		synchronized (BitmapCache.class) {
 			if (self == null) {
@@ -26,6 +30,10 @@ public class BitmapCache {
 			}
 		}
 		return self;
+	}
+	
+	private BitmapCache(){
+		mFixThreadPool = Executors.newFixedThreadPool(2);
 	}
 
 	public Bitmap getFolderCoverBitmapCache(String path, boolean isPrivate){
@@ -90,7 +98,7 @@ public class BitmapCache {
 		}else{
 			WeakReference<BitmapCache.IDecodeInvoke> r = new WeakReference<BitmapCache.IDecodeInvoke>(UIInvoke);
 			mDecodeWaitList.add(r);
-			new Thread(new Runnable() {				
+			mFixThreadPool.execute(new Runnable() {				
 				@Override
 				public void run() {
 					Log.i("xinmeng_bitmap", "decode thread begin " + path);
@@ -98,7 +106,7 @@ public class BitmapCache {
 					mBitmapCacheMap.put(path, bitmap);
 					notifyDecodeReady(path);
 				}
-			}).start();
+			});
 			return null;
 		}
 	}
