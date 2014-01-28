@@ -66,6 +66,9 @@ OnGestureListener{
 	
 	
 	private void setupBitmap(String path){
+		if(mBigBitmap != null){
+			mBigBitmap.recycle();
+		}
 		mBigBitmap = BitmapUtility.getOriginBitmap(path);
         //将图片显示到ImageView中  
         mImageView.setImageBitmap(mBigBitmap); 

@@ -191,11 +191,24 @@ public class BitmapUtility {
     }
 	
 	public static Bitmap getOriginBitmap(String pathString){
+		// first make sure the sample 
+		int sample=1;
+		BitmapFactory.Options op = new BitmapFactory.Options();
+		op.inJustDecodeBounds = true;
+		
+		BitmapFactory.decodeFile(pathString, op);
+		
+		if(op.outHeight* op.outWidth > 500*500){
+			sample = (op.outHeight* op.outWidth)/(500*500);
+		}
+		op.inJustDecodeBounds = false;
+		op.inSampleSize = sample;
+		
 		int degree = getDegrees(pathString);
 		if(degree == 0){
-			return BitmapFactory.decodeFile(pathString);
+			return BitmapFactory.decodeFile(pathString,op);
 		}
-	    Bitmap srcBitmap = BitmapFactory.decodeFile(pathString);  
+	    Bitmap srcBitmap = BitmapFactory.decodeFile(pathString,op);  
 	    if(srcBitmap == null){
 	    	return null;
 	    }
