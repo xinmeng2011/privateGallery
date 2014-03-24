@@ -247,6 +247,7 @@ containing a value of this type.
         /**  Accessibility description sent when user starts drawing a lock pattern. 
          */
         public static final int lockscreen_access_pattern_start=0x7f06001f;
+        public static final int no_password_hint=0x7f060023;
         public static final int no_sd_tip=0x7f060003;
         public static final int photo_title=0x7f060009;
         public static final int plz_wait=0x7f06001d;

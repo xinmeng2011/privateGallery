@@ -12,4 +12,15 @@ public class ScreenHelper {
 		}
 		return density;
 	}
+	
+//	public static int getScreenWidth(Context context){
+//		int width  = 0;
+//		width = context.getResources().getDefaultDisplay().getWidth();
+//		return width;
+//	}
+//	
+//	public static int getScreenHeight(){
+//		int height = 0;
+//		return height;
+//	}
 }

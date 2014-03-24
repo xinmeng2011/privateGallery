@@ -13,6 +13,7 @@ import com.mm.privategallery.view.ChooseGalleryTopBar;
 import com.mm.privategallery.view.EditTopBar;
 import com.mm.utility.NotifyUtility;
 import com.mm.utility.SDHelper;
+import com.mm.utility.ToastUtility;
 
 import android.R.bool;
 import android.app.Activity;
@@ -21,6 +22,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -79,6 +81,7 @@ public class ChooseGalleryActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
+				
 				String galleryPathString ="";
 				GalleryFolderDataItem item = (GalleryFolderDataItem)mAdapter.getItem(arg2);
 				if(item == null){
@@ -157,7 +160,8 @@ public class ChooseGalleryActivity extends Activity {
 	private void switchToPrisvateView(){
 		if(isPrivateMode){
 			return;
-		}if(mIsPrivatePassed){
+		}
+		if(SmsPasswordManager.getInstance().hasPassword()){
 				List<GalleryFolderDataItem> folders = GalleryEngine.getSingle().getPrivateFolderList();
 				mAdapter.setData(folders);
 				isPrivateMode = true;
@@ -236,6 +240,10 @@ public class ChooseGalleryActivity extends Activity {
 	private void encryptSelectedItems(){
 		if(isPrivateMode){
 			Toast.makeText(this, "更多功能敬请期待", 500).show();
+			return;
+		}
+		if(!SmsPasswordManager.getInstance().hasPassword()){
+			ToastUtility.showLongToast(R.string.no_password_hint, this);
 			return;
 		}
 		if(isPrivateMode){

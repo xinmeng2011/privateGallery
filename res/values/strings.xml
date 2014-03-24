@@ -42,4 +42,5 @@
 	<string name="lockscreen_access_pattern_cell_added">Cell added</string>
 	<!-- Accessibility description sent when user completes drawing a pattern. -->
 	<string name="lockscreen_access_pattern_detected">Pattern completed</string>
+	<string name="no_password_hint">没有设置笔密码，请先设置密码</string>
 </resources>

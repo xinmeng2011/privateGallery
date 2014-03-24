@@ -190,17 +190,19 @@ public class BitmapUtility {
         return b;
     }
 	
-	public static Bitmap getOriginBitmap(String pathString){
+	public static Bitmap getOriginBitmap(String pathString, int requireWidth, int requireHeight){
 		// first make sure the sample 
 		int sample=1;
 		BitmapFactory.Options op = new BitmapFactory.Options();
 		op.inJustDecodeBounds = true;
 		
 		BitmapFactory.decodeFile(pathString, op);
-		
-		if(op.outHeight* op.outWidth > 500*500){
-			sample = (op.outHeight* op.outWidth)/(500*500);
-		}
+		 
+	    if (op.outHeight > requireHeight || op.outWidth > requireWidth) {  
+	        final int heightRatio = Math.round((float) op.outHeight / (float) requireHeight);  
+	        final int widthRatio = Math.round((float) op.outWidth / (float) requireWidth);  
+	        sample = heightRatio > widthRatio ? heightRatio : widthRatio;  
+	    }  
 		op.inJustDecodeBounds = false;
 		op.inSampleSize = sample;
 		
@@ -226,5 +228,59 @@ public class BitmapUtility {
             // Android123建议大家如何出现了内存不足异常，最好return 原始的bitmap对象。.
         }
         return null;
+	}
+	
+	public static Bitmap getOriginPrivateBitmap(String path, int requireWidth, int requireHeight){
+		
+		FileInputStream is;
+		byte[] arraySrc = null;
+		byte[] arrayDes = null;
+		try {
+			is = new FileInputStream(path);	
+			arraySrc = new byte[is.available()];		
+			is.read(arraySrc);
+		    is.close();
+		    arrayDes = DESHelper.decryptDESFile(arraySrc, passwordString);
+		}
+        catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+	     BitmapFactory.Options options = new BitmapFactory.Options();
+	     options.inJustDecodeBounds = true;
+	        // 获取这个图片的宽和高
+	     int size= arrayDes.length;
+	     Bitmap bitmap = BitmapFactory.decodeByteArray(arrayDes,0,arrayDes.length,options); //此时返回bm为空
+	     int sample =1;
+	     options.inJustDecodeBounds = false;
+		 if(options.outHeight* options.outWidth > 500*500){
+				sample = (options.outHeight* options.outWidth)/(750*750);
+		 }
+	     options.inSampleSize = sample;
+	   
+	     int degrees = getDegrees(path);
+	     if(degrees == 0){
+				return bitmap=BitmapFactory.decodeByteArray(arrayDes,0,arrayDes.length,options);
+			}
+		    Bitmap srcBitmap = bitmap=BitmapFactory.decodeByteArray(arrayDes,0,arrayDes.length,options);;  
+		    if(srcBitmap == null){
+		    	return null;
+		    }
+	        Matrix m = new Matrix();
+	        m.setRotate(degrees,
+	                (float) srcBitmap.getWidth(), (float)srcBitmap.getHeight());
+	        try {
+	            Bitmap b2 = Bitmap.createBitmap(
+	                    srcBitmap, 0, 0, srcBitmap.getWidth(), srcBitmap.getHeight(), m, true);
+	            if(b2 != srcBitmap){
+	            	srcBitmap.recycle();
+	            }
+	            return b2;
+	        } catch (OutOfMemoryError ex) {
+	            // Android123建议大家如何出现了内存不足异常，最好return 原始的bitmap对象。.
+	        }
+	        return null;
 	}
 }

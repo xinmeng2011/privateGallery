@@ -2,6 +2,7 @@ package com.mm.privategallery.controler;
 
 import com.mm.privategallery.R;
 import com.mm.utility.BitmapUtility;
+import com.mm.utility.SDHelper;
 
 import android.R.integer;
 import android.app.Activity;
@@ -9,6 +10,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
@@ -46,7 +49,12 @@ OnGestureListener{
 	protected void onStart() {
 		super.onStart();
 		initUI();
-		setupBitmap(mPicPath[mPicId]);
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				setupBitmap(mPicPath[mPicId]);
+			}
+		}, 500);
 	}
 
 	@Override
@@ -69,7 +77,14 @@ OnGestureListener{
 		if(mBigBitmap != null){
 			mBigBitmap.recycle();
 		}
-		mBigBitmap = BitmapUtility.getOriginBitmap(path);
+		//mImageView.getLayoutParams().width;
+		int reqW = mImageView.getWidth();
+		int reqH = mImageView.getHeight();
+		if(!SDHelper.isPrivateImage(path)){
+			mBigBitmap = BitmapUtility.getOriginBitmap(path, reqW, reqH);
+		}else{
+			mBigBitmap = BitmapUtility.getOriginPrivateBitmap(path,reqW, reqH);
+		}
         //将图片显示到ImageView中  
         mImageView.setImageBitmap(mBigBitmap); 
 	}
@@ -134,5 +149,13 @@ OnGestureListener{
     public boolean onSingleTapUp(MotionEvent e) {  
         // TODO Auto-generated method stub  
         return false;  
-    }  
+    }
+    
+    
+    public Handler mHandler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			
+		}
+		};
 }

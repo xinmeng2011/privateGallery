@@ -8,9 +8,11 @@ import com.mm.privategallery.R;
 import com.mm.privategallery.dao.ImageInfo;
 import com.mm.privategallery.model.GalleryEngine;
 import com.mm.privategallery.model.GalleryFolderDataItem;
+import com.mm.privategallery.model.SmsPasswordManager;
 import com.mm.privategallery.view.BottomBar;
 import com.mm.privategallery.view.EditTopBar;
 import com.mm.utility.SDHelper;
+import com.mm.utility.ToastUtility;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -222,6 +224,10 @@ public class SelectPictureActivity extends Activity {
 	};
 	
 	private void tansferPictures(){
+		if(!SmsPasswordManager.getInstance().hasPassword()){
+			ToastUtility.showLongToast(R.string.no_password_hint, this);
+			return;
+		}
 		if(!mPrivate){
 			mProgressDialog = ProgressDialog.show(this, "º”√‹Õº∆¨", "«Î…‘∫Û..", true, true); 
 		}else{
