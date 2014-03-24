@@ -17,9 +17,11 @@ import com.mm.utility.ToastUtility;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -268,7 +270,10 @@ public class SelectPictureActivity extends Activity {
 				for (int i = 0; i < items.size(); i++) {
 					ImageInfo item= items.get(i);
 					if(item != null){
-						SDHelper.deleteFile(new File(item.pathString));
+						//SDHelper.deleteFile(new File(item.pathString));
+						//getContentResolver().delete(Uri.fromFile(new File(item.pathString)), null, null);
+						String params[] = new String[]{item.pathString};
+						getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.DATA + " LIKE ?", params);
 					}
 				}
 				SDHelper.sendbroadcastScanSD(mFolderPathString);

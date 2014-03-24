@@ -255,9 +255,11 @@ public class BitmapUtility {
 	     Bitmap bitmap = BitmapFactory.decodeByteArray(arrayDes,0,arrayDes.length,options); //此时返回bm为空
 	     int sample =1;
 	     options.inJustDecodeBounds = false;
-		 if(options.outHeight* options.outWidth > 500*500){
-				sample = (options.outHeight* options.outWidth)/(750*750);
-		 }
+	     if (options.outHeight > requireHeight || options.outWidth > requireWidth) {  
+	        final int heightRatio = Math.round((float) options.outHeight / (float) requireHeight);  
+	        final int widthRatio = Math.round((float) options.outWidth / (float) requireWidth);  
+	        sample = heightRatio > widthRatio ? heightRatio : widthRatio;  
+	     } 
 	     options.inSampleSize = sample;
 	   
 	     int degrees = getDegrees(path);
