@@ -272,11 +272,9 @@ public class SelectPictureActivity extends Activity {
 					if(item != null){
 						//SDHelper.deleteFile(new File(item.pathString));
 						//getContentResolver().delete(Uri.fromFile(new File(item.pathString)), null, null);
-						String params[] = new String[]{item.pathString};
-						getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.DATA + " LIKE ?", params);
+						SDHelper.deleteSinglePicture(SelectPictureActivity.this, item.pathString);
 					}
 				}
-				SDHelper.sendbroadcastScanSD(mFolderPathString);
 				mHandler.sendEmptyMessage(DELETE_OK);
 			}
 		}).start();

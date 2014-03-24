@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 
 public class SDHelper {
 	
@@ -191,4 +192,9 @@ public class SDHelper {
 	            file.delete();
 	        }
 	    }
+	 
+	 public static void deleteSinglePicture(Context ctx, String path){
+		 String params[] = new String[]{path};
+		 ctx.getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.DATA + " LIKE ?", params);
+	 }
 }

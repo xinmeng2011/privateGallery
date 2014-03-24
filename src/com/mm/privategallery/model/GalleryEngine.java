@@ -201,7 +201,7 @@ public class GalleryEngine {
 	
 	public boolean encryptImageFileAndDelOld(String path){
 		if(encryptImage(path)){
-			SDHelper.deleteFile(new File(path));
+			SDHelper.deleteSinglePicture(PrivateGalleryApp.globalContext,path);
 			clearPrivateData();
 			return true;
 		}else{

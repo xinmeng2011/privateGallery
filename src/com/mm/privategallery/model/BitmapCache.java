@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 
 import com.mm.privategallery.view.DecodeImageView;
 import com.mm.utility.BitmapUtility;
+import com.mm.utility.SDHelper;
 
 import android.graphics.Bitmap;
 import android.provider.ContactsContract.CommonDataKinds.Identity;
@@ -102,7 +103,12 @@ public class BitmapCache {
 				@Override
 				public void run() {
 					Log.i("xinmeng_bitmap", "decode thread begin " + path);
-					Bitmap bitmap =  BitmapUtility.getDecodeBitmapWithArg(path);
+					Bitmap bitmap = null;
+					if(SDHelper.isPrivateImage(path)){
+						bitmap =  BitmapUtility.getDecodePrivateBitmap(path);	
+					}else{
+						bitmap =  BitmapUtility.getDecodeBitmapWithArg(path);	
+					}
 					mBitmapCacheMap.put(path, bitmap);
 					notifyDecodeReady(path);
 				}
