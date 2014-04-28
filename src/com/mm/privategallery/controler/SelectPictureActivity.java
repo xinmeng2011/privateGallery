@@ -30,6 +30,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SelectPictureActivity extends Activity {
@@ -43,6 +44,7 @@ public class SelectPictureActivity extends Activity {
 	private EditTopBar mEditTopBar;
 	private BottomBar mBottomBar;
 	private RelativeLayout mTopbar;
+	private TextView mTitleTextView;
 	private boolean mPrivate=false;
 	private ProgressDialog mProgressDialog;
 	
@@ -77,6 +79,7 @@ public class SelectPictureActivity extends Activity {
 	private void initUI(){
 		setContentView(R.layout.activity_select_pic);
 		mTopbar = (RelativeLayout)findViewById(R.id.top_wrapper);
+		mTitleTextView = (TextView)findViewById(R.id.folder_title_tv);
 		mEditTopBar = (EditTopBar)findViewById(R.id.topbar_edit);
 		mBottomBar = (BottomBar)findViewById(R.id.bottombar_edit);
 		mBottomBar.setClickListener(mBottomClickListener);
@@ -179,12 +182,14 @@ public class SelectPictureActivity extends Activity {
 		}else{
 			itemFolder = GalleryEngine.getSingle().getPrivateFolderItemFromPath(mFolderPathString);
 		}
+		mTitleTextView.setText(itemFolder.mFolderName);
 		List<ImageInfo> images= itemFolder.mImageList;
 		refreshSelectedItem(images);
 		mAdapter.setData(images);
 	}
 	
 	private void setEditStatus(boolean bEdit){
+		mEdit = bEdit;
 		if(bEdit){
 			mTopbar.setVisibility(View.INVISIBLE);
 			mEditTopBar.setVisibility(View.VISIBLE);
@@ -294,11 +299,14 @@ public class SelectPictureActivity extends Activity {
 				mAdapter.clearSelectedItems();
 				closeDlg();
 				setEditStatus(false);
+				closeActivityIfEmpty();
 				break;
 			case TANSFER_OK:
 				mAdapter.clearSelectedItems();
 				closeDlg();
 				setEditStatus(false);
+				closeActivityIfEmpty();
+				break;
 			case READ_PIC_READY:
 				bindData();
 				closeDlg();
@@ -308,6 +316,13 @@ public class SelectPictureActivity extends Activity {
 			}
 			}
 	};
+	
+	public void closeActivityIfEmpty(){
+		if(mAdapter.getCount()==0){
+			GalleryEngine.getSingle().removeFoldFromFolderMap(mFolderPathString);
+			this.finish();
+		}
+	}
 	
 	
 	public void readPictureAsync(){

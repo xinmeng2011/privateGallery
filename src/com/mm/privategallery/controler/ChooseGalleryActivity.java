@@ -142,7 +142,7 @@ public class ChooseGalleryActivity extends Activity {
 			mAdapter = new GalleryFolderAdapter(this);
 			mGalleryGridView.setAdapter(mAdapter);
 		}else{
-			switchToPrisvateView();
+			switchToPrisvateView(true);
 		}
 	}
 	
@@ -157,8 +157,8 @@ public class ChooseGalleryActivity extends Activity {
 		mTypeTextView.setText(R.string.photo_title);
 	}
 	 
-	private void switchToPrisvateView(){
-		if(isPrivateMode){
+	private void switchToPrisvateView(Boolean bForceUpdate){
+		if(isPrivateMode && !bForceUpdate){
 			return;
 		}
 		if(SmsPasswordManager.getInstance().hasPassword()){
@@ -206,7 +206,7 @@ public class ChooseGalleryActivity extends Activity {
 				deleteSelectedItems();
 				break;
 			case R.id.private_bt:
-				switchToPrisvateView();
+				switchToPrisvateView(false);
 				break;
 			case R.id.system_bt:
 				switchToGalleryView();
@@ -228,8 +228,8 @@ public class ChooseGalleryActivity extends Activity {
 					GalleryFolderDataItem item= items.get(i);
 					if(item != null){
 						String pathString= item.mFolderPath;
-						SDHelper.deleteFile(new File(pathString));
-						SDHelper.sendbroadcastScanSD(pathString);
+						SDHelper.deleteFile(ChooseGalleryActivity.this,new File(pathString));
+						//SDHelper.sendbroadcastScanSD(pathString);
 					}
 				}
 				mHandler.sendEmptyMessage(DELETE_OK);
@@ -355,7 +355,7 @@ public class ChooseGalleryActivity extends Activity {
 				}else{// 密码设置成功
 					mIsPrivatePassed = true;
 					mTopbar.updateTopUI(true);
-					switchToPrisvateView();
+					switchToPrisvateView(false);
 					Toast.makeText(this,"设置成功", Toast.LENGTH_LONG).show();
 				}
 				break;
@@ -367,7 +367,7 @@ public class ChooseGalleryActivity extends Activity {
 				else{
 					mIsPrivatePassed = true;
 					mTopbar.updateTopUI(true);
-					switchToPrisvateView();
+					switchToPrisvateView(false);
 				}
 				Toast.makeText(this, getString(R.string.lock_modify_success), Toast.LENGTH_LONG).show();
 				break;

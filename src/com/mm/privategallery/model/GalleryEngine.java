@@ -119,6 +119,12 @@ public class GalleryEngine {
 		}
 	}
 	
+	public void removeFoldFromFolderMap(String path){
+		if(mPrivateFolderHashMap.containsKey(path)){
+			mPrivateFolderHashMap.remove(path);
+		}
+	}
+	
 	public GalleryFolderDataItem getPrivateFolderItemFromPath(String path){
 		if(mPrivateFolderHashMap.containsKey(path)){
 			return mPrivateFolderHashMap.get(path);
@@ -171,6 +177,7 @@ public class GalleryEngine {
 	
 	public void decryptImageAndDel(String path){
 		if(decryptImage(path)){
+			clearPrivateData();
 			clearPublicData();
 		}else{
 			
