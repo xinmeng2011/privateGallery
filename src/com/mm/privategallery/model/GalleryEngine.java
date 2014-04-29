@@ -177,8 +177,8 @@ public class GalleryEngine {
 	
 	public void decryptImageAndDel(String path){
 		if(decryptImage(path)){
-			clearPrivateData();
-			clearPublicData();
+			//clearPrivateData();
+ 			clearPublicData();
 		}else{
 			
 		}
@@ -237,6 +237,6 @@ public class GalleryEngine {
 	
 	private void clearPublicData(){
 		mPublicFolderDataItems = null;
-		mPrivateFolderHashMap.clear();
+		mPublicFolderHashMap.clear();
 	}
 }
