@@ -9,6 +9,8 @@ import com.mm.privategallery.model.PrivateGalleryApp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaScannerConnection;
+import android.media.MediaScannerConnection.MediaScannerConnectionClient;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -117,6 +119,14 @@ public class SDHelper {
 		File file= new File(fileFillPathString);
 		try {
 			writeSDFile(file, data, false);
+			//sendbroadcastScanSD(file.getAbsolutePath());
+			String newpath = MediaStore.Images.Media.insertImage(PrivateGalleryApp.globalContext.getContentResolver(),
+					file.getAbsolutePath(),"","");
+			deleteSinglePicture(PrivateGalleryApp.globalContext, file.getAbsolutePath());
+			Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);     
+			Uri uri = Uri.fromFile(new File(newpath));     
+			intent.setData(uri);     
+			PrivateGalleryApp.globalContext.sendBroadcast(intent); 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -173,10 +183,13 @@ public class SDHelper {
 	}
 	
 	public static void sendbroadcastScanSD(String path){
-		Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);     
-		 Uri uri = Uri.fromFile(new File(path));     
-		 intent.setData(uri);     
-		 PrivateGalleryApp.globalContext.sendBroadcast(intent);    
+		Uri uri =  Uri.parse("file:///"+path);
+		Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,uri);       
+		PrivateGalleryApp.globalContext.sendBroadcast(intent);
+	}
+	
+	public static void sendbroadcastWholeSD(){
+		PrivateGalleryApp.globalContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
 	}
 	
 	 public static void deleteFile(Context ctx, File file) {

@@ -39,6 +39,7 @@ public class GalleryEngine {
 
 	public List<GalleryFolderDataItem> getPrivateFolderList(){
 		if(mPrivateFolderDataItems != null){
+			makeSureNoneEmptyFolder(mPrivateFolderDataItems);
 			return mPrivateFolderDataItems;
 		}
 		
@@ -70,8 +71,17 @@ public class GalleryEngine {
 		
 	}
 	
+	private void makeSureNoneEmptyFolder(List<GalleryFolderDataItem> items){
+		for (int i = items.size()-1; i>=0; i--) {
+			if(items.get(i).mImageList.size() == 0){
+				items.remove(i);
+			}
+		}
+	}
+	
 	public List<GalleryFolderDataItem> getGalleryFolderList(){
 		if(mPublicFolderDataItems != null){
+			makeSureNoneEmptyFolder(mPublicFolderDataItems);
 			return mPublicFolderDataItems;
 		}
 		GalleryDao dataCenter = new GalleryDao(PrivateGalleryApp.globalContext);
